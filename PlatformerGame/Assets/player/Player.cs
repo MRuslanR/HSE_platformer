@@ -9,11 +9,13 @@ public class Player : MonoBehaviour
     public int speed = 10;
     private bool isOnGround = false;
     private Vector3 _groundCheckOffset = new Vector3(0, 0.5f, 0);
+    private Rigidbody2D _rb;
     
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
+        _rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -41,7 +43,7 @@ public class Player : MonoBehaviour
             {
                 isOnGround = false;
                 anim.SetBool("Jumping", true);
-                GetComponent<Rigidbody2D>().AddForce(Vector2.up * 5f,ForceMode2D.Impulse);
+                _rb.AddForce(Vector2.up * 5f,ForceMode2D.Impulse);
             }
         }
     }
@@ -58,16 +60,4 @@ public class Player : MonoBehaviour
         }
     }
     
-    
-    void OnCollisionExit2D(Collision2D collision)
-    {
-        // isOnGround = false;
-        // foreach (ContactPoint2D contact in collision.contacts)
-        // {
-        //     if (contact.normal.y > 0.9f)
-        //     {
-        //         isOnGround = true;
-        //     }   
-        // }
-    }
 }
