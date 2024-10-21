@@ -6,24 +6,37 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public Animator anim;
+    private Rigidbody2D rb;
+
     public int speed = 10;
     private bool isOnGround = false;
-    private Vector3 _groundCheckOffset = new Vector3(0, 0.5f, 0);
-    private Rigidbody2D _rb;
+    public float jump_force = 10;
+
+    public Camera cam;
     
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
-        _rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        GetComponent<Rigidbody2D>().velocity = new Vector2(Input.GetAxis("Horizontal")*speed,GetComponent<Rigidbody2D>().velocity[1]);
+
+
+    }
+    
+    
+    void Update()
+    {
+        //cam 
+        cam.transform.position = Vector3.Lerp(cam.transform.position, new Vector3(transform.position.x, transform.position.y, -10), Time.deltaTime * 5);
+
+        // Move
+        GetComponent<Rigidbody2D>().velocity = new Vector2(Input.GetAxis("Horizontal") * speed, GetComponent<Rigidbody2D>().velocity[1]);
         anim.SetFloat("moveX", Mathf.Abs(Input.GetAxis("Horizontal")));
-        
         if (Input.GetAxis("Horizontal") < 0)
         {
             GetComponent<SpriteRenderer>().flipX = true;
@@ -32,18 +45,16 @@ public class Player : MonoBehaviour
         {
             GetComponent<SpriteRenderer>().flipX = false;
         }
-    }
-    
-    
-    void Update()
-    {
+
+
+        // Jump
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (isOnGround)
             {
                 isOnGround = false;
                 anim.SetBool("Jumping", true);
-                _rb.AddForce(Vector2.up * 5f,ForceMode2D.Impulse);
+                rb.AddForce(Vector2.up * jump_force,ForceMode2D.Impulse);
             }
         }
     }
