@@ -25,8 +25,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-
-
+        GetComponent<Rigidbody2D>().velocity = new Vector2(Input.GetAxis("Horizontal") * speed, GetComponent<Rigidbody2D>().velocity[1]);
     }
     
     
@@ -36,17 +35,19 @@ public class Player : MonoBehaviour
         cam.transform.position = Vector3.Lerp(cam.transform.position, new Vector3(transform.position.x, transform.position.y, -10), Time.deltaTime * 5);
 
         // Move
-        GetComponent<Rigidbody2D>().velocity = new Vector2(Input.GetAxis("Horizontal") * speed, GetComponent<Rigidbody2D>().velocity[1]);
+        
         anim.SetFloat("moveX", Mathf.Abs(Input.GetAxis("Horizontal")));
-        if (Input.GetAxis("Horizontal") < 0)
+        if (Input.GetAxis("Horizontal") != 0)
         {
-            GetComponent<SpriteRenderer>().flipX = true;
+            if (Input.GetAxis("Horizontal") > 0)
+            {
+                GetComponent<SpriteRenderer>().flipX = true;
+            }
+            else
+            {
+                GetComponent<SpriteRenderer>().flipX = false;
+            }
         }
-        else
-        {
-            GetComponent<SpriteRenderer>().flipX = false;
-        }
-
 
         // Jump
         if (Input.GetKeyDown(KeyCode.Space))
