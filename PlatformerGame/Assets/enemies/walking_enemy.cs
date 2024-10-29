@@ -15,7 +15,7 @@ public class walking_enemy : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         GetComponent<Rigidbody2D>().velocity = new Vector2(speed * direction, GetComponent<Rigidbody2D>().velocity.y);
         transform.localScale = new Vector3(direction, 1, 0);
