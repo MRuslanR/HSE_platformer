@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class walking_enemy : MonoBehaviour
 {
@@ -20,10 +21,21 @@ public class walking_enemy : MonoBehaviour
         transform.localScale = new Vector3(direction, 1, 0);
 
     }
-    void OnCollisionEnter2D(Collision2D col)
+    void OnCollisionStay2D(Collision2D col)
     {
-        if (col.gameObject.tag == "Wall")
-            direction *= -1f;
+        foreach (ContactPoint2D contact in col.contacts)
+        {
+            if (contact.normal.x > 0.9f)
+            {
+                direction = 1f;
+                break;
+            }
+            else if (contact.normal.x < -0.9f)
+            {
+                direction = -1f;
+                break;
+            }
+        }
     }
 
 }

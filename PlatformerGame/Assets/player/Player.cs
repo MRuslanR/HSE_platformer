@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
@@ -59,7 +60,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionStay2D(Collision2D collision)
     {
         foreach (ContactPoint2D contact in collision.contacts)
         {
@@ -71,4 +72,9 @@ public class Player : MonoBehaviour
         }
     }
     
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        isOnGround = false;
+        anim.SetBool("Jumping", true);
+    }
 }
