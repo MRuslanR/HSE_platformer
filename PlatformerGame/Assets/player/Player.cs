@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Image = UnityEngine.UI.Image;
 
 public class Player : MonoBehaviour
 {
@@ -12,8 +13,11 @@ public class Player : MonoBehaviour
     public int speed = 10;
     private bool isOnGround = false;
     public float jump_force = 10;
+    public Image hp_bar;
 
     public Camera cam;
+    
+    private int damage_timer = 0;
     
     // Start is called before the first frame update
     void Start()
@@ -25,13 +29,26 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (damage_timer > 0)
+        {
+            damage_timer -= 1;
+        }
         GetComponent<Rigidbody2D>().velocity = new Vector2(Input.GetAxis("Horizontal") * speed, GetComponent<Rigidbody2D>().velocity[1]);
     }
-    
+
+    public void Damage()
+    {
+        if (damage_timer == 0)
+        {
+            hp_bar.fillAmount -= 0.33f;
+            print("Ай, больно в ноге");
+            damage_timer += 50;
+        }
+    }
     
     void Update()
     {
-        //cam 
+        //cam
         cam.transform.position = Vector3.Lerp(cam.transform.position, new Vector3(transform.position.x, transform.position.y, -10), Time.deltaTime * 5);
 
         // Move

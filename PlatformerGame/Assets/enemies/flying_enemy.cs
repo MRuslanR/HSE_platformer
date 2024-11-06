@@ -44,6 +44,18 @@ public class flying_enemy : MonoBehaviour
     {
         foreach (ContactPoint2D contact in col.contacts)
         {
+            if (col.collider.CompareTag("Player") && contact.normal.y < -0.7f)
+            {
+                print("Есть пробитие");
+            }
+            else if (col.collider.CompareTag("Player"))
+            {
+                var player = col.collider.GetComponent<Player>();
+                if (player != null)
+                {
+                    player.Damage();
+                }
+            }
             if (contact.normal.x > 0.9f)
             {
                 x_way = 0;
