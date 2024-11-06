@@ -24,9 +24,9 @@ public class bullet : MonoBehaviour
         
     }
 
-    //void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    // Удаляем пулю при столкновении с любым объектом
-    //    Destroy(gameObject);
-    //}
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Удаляем пулю при столкновении с любым объектом
+        Destroy(gameObject);
+    }
 }
