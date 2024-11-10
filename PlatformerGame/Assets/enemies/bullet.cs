@@ -21,12 +21,29 @@ public class bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
         // Удаляем пулю при столкновении с любым объектом
+
+    }
+
+    void OnCollisionStay2D(Collision2D col)
+    {
+        foreach (ContactPoint2D contact in col.contacts)
+        {
+            if (col.collider.CompareTag("Player"))
+            {
+                print("Есть пробитие");
+                var player = col.collider.GetComponent<Player>();
+                if (player != null)
+                {
+                    player.Damage();
+                }
+            }
+        }
         Destroy(gameObject);
     }
 }

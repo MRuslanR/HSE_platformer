@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Image = UnityEngine.UI.Image;
@@ -14,6 +15,7 @@ public class Player : MonoBehaviour
     private bool isOnGround = false;
     public float jump_force = 10;
     public Image hp_bar;
+    public TextMeshProUGUI GameOver;
 
     public Camera cam;
     
@@ -42,9 +44,18 @@ public class Player : MonoBehaviour
         {
             hp_bar.fillAmount -= 0.33f;
             print("Ай, больно в ноге");
-            damage_timer += 50;
+            damage_timer += 20;
+
+            if (hp_bar.fillAmount <= 0.1)
+            {
+                GameOver.enabled = true;
+                Time.timeScale = 0f;
+
+            }
         }
     }
+
+
     
     void Update()
     {
