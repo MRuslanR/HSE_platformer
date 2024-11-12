@@ -9,6 +9,7 @@ public class flying_enemy : MonoBehaviour
     float direction = -1f;
     public float distance = 300f;
     public bool isSyn = true;
+    public Animator animator;
     private float x_way = 0;
     private float start_y = 0;
     private Vector3 start_scale;
@@ -18,6 +19,7 @@ public class flying_enemy : MonoBehaviour
     {
         start_y = transform.position.y;
         start_scale = transform.localScale;
+        animator.Play("fly");
     }
 
     void FixedUpdate()
