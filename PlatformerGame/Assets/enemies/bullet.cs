@@ -26,7 +26,7 @@ public class bullet : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // Удаляем пулю при столкновении с любым объектом
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
     }
 
@@ -36,7 +36,6 @@ public class bullet : MonoBehaviour
         {
             if (col.collider.CompareTag("Player"))
             {
-                print("Есть пробитие");
                 var player = col.collider.GetComponent<Player>();
                 if (player != null)
                 {

@@ -33,7 +33,26 @@ public class Player : MonoBehaviour
     {
         if (damage_timer > 0)
         {
+            if (damage_timer % 2 == 0)
+            {
+                Color color = GetComponent<SpriteRenderer>().material.color;
+                if (color.a == 0.25f)
+                {
+                    color.a = 1.0f;
+                }
+                else
+                {
+                    color.a = 0.25f;
+                }
+                GetComponent<SpriteRenderer>().material.color = color;
+            }
             damage_timer -= 1;
+        }
+        else
+        {
+            Color color = GetComponent<SpriteRenderer>().material.color;
+            color.a = 1.0f;
+            GetComponent<SpriteRenderer>().material.color = color;
         }
         GetComponent<Rigidbody2D>().velocity = new Vector2(Input.GetAxis("Horizontal") * speed, GetComponent<Rigidbody2D>().velocity[1]);
     }
@@ -43,7 +62,6 @@ public class Player : MonoBehaviour
         if (damage_timer == 0)
         {
             hp_bar.fillAmount -= 0.33f;
-            print("Ай, больно в ноге");
             damage_timer += 20;
 
             if (hp_bar.fillAmount <= 0.1)
