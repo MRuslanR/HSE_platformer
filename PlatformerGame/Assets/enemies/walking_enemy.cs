@@ -6,7 +6,7 @@ using System;
 public class walking_enemy : MonoBehaviour
 {
     public float speed = 1f;
-    float direction = -1f;
+    public float direction = -1f;
 
     private int isMoving = 1;
 
