@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 public class TriggerLevel_4 : MonoBehaviour
 {
-   private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
@@ -13,4 +14,5 @@ public class TriggerLevel_4 : MonoBehaviour
             SceneManager.LoadScene("Level_5");
         }
     }
+
 }

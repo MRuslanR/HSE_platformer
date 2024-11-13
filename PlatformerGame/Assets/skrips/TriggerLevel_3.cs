@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 public class TriggerLevel_3 : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D other)
@@ -13,4 +14,5 @@ public class TriggerLevel_3 : MonoBehaviour
             SceneManager.LoadScene("Level_4");
         }
     }
+
 }
