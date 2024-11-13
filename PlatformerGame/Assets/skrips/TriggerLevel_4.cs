@@ -8,6 +8,8 @@ public class TriggerLevel_4 : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            PlayerPrefs.SetInt("PlayerLevel", 5);
+            PlayerPrefs.Save(); // Сохраняем изменения
             SceneManager.LoadScene("Level_5");
         }
     }

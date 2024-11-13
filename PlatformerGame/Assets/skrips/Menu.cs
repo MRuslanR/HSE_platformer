@@ -10,6 +10,21 @@ public class Menu : MonoBehaviour
         SceneManager.LoadScene("Level_1");
     }
 
+    public void ContinueGame()
+    {
+
+        if (PlayerPrefs.HasKey("PlayerLevel"))
+        {
+            print("Level_" + PlayerPrefs.GetInt("PlayerLevel").ToString());
+            SceneManager.LoadScene("Level_" + PlayerPrefs.GetInt("PlayerLevel").ToString());
+        }
+        else
+        {
+            print("1 lvl");
+            SceneManager.LoadScene("Level_1");
+        }
+
+    }
 
     public void ExitGame() 
     {
