@@ -52,7 +52,7 @@ public class flying_enemy : MonoBehaviour
             if (col.collider.CompareTag("Player") && contact.normal.y < -0.7f)
             {
                 GetComponent<Animator>().enabled = false;
-                GetComponent<CircleCollider2D>().enabled = false;
+                GetComponent<BoxCollider2D>().enabled = false;
                 GetComponent<Rigidbody2D>().gravityScale = 1;
                 GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                 isMoving = 0;
