@@ -7,6 +7,8 @@ public class Menu : MonoBehaviour
 {
     public void PlayGame() 
     {
+        PlayerPrefs.SetInt("PlayerLevel", 1);
+        PlayerPrefs.Save(); 
         SceneManager.LoadScene("Level_1");
     }
 

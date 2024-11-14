@@ -5,6 +5,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Image = UnityEngine.UI.Image;
+using UnityEngine.SceneManagement;
+using System. Threading;
 
 public class Player : MonoBehaviour
 {
@@ -20,7 +22,8 @@ public class Player : MonoBehaviour
     public Camera cam;
     
     private int damage_timer = 0;
-    
+    private int death_timer = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -71,6 +74,7 @@ public class Player : MonoBehaviour
 
             }
         }
+
     }
 
 
@@ -80,7 +84,7 @@ public class Player : MonoBehaviour
         //cam
         cam.transform.position = Vector3.Lerp(cam.transform.position, new Vector3(transform.position.x, transform.position.y, -10), Time.deltaTime * 5);
 
-        // Move
+        // Movedd
         
         anim.SetFloat("moveX", Mathf.Abs(Input.GetAxis("Horizontal")));
         if (Input.GetAxis("Horizontal") != 0)
@@ -103,6 +107,16 @@ public class Player : MonoBehaviour
                 isOnGround = false;
                 anim.SetBool("Jumping", true);
                 rb.AddForce(Vector2.up * jump_force,ForceMode2D.Impulse);
+            }
+        }
+        if (GameOver.enabled ){
+            if (death_timer < 100){
+                death_timer += 10;
+            }
+            else{
+                Thread.Sleep(3000);
+                Time.timeScale = 1f;
+                SceneManager.LoadScene("Level_" + PlayerPrefs.GetInt("PlayerLevel").ToString());
             }
         }
     }
